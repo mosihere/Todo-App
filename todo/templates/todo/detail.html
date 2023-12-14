@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+
+
+
+    {% block tab_title %}
+
     <title>Todo Detail</title>
-</head>
-<body>
-    <h4>{{ todo.details }}</h4>
-    <p> {{ todo.priority }}</p>
+
+    {% endblock tab_title %}
 
 
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-    </form>
 
+    {% block page_content %}
 
-    <small>{{ todo.created_at }}</small>
-</body>
-</html>
+        <h4>{{ todo.details }}</h4>
+        <p> {{ todo.priority }}</p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+
+        <small>{{ todo.created_at }}</small>
+
+    {% endblock page_content %}

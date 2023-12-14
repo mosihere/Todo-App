@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    {% for todo in todos %}
 
-    <a href="{% url 'todo:todo-detail' pk=todo.pk%}">
-        <h3>{{todo.title}}</h3>
-    </a>
-        
-    {% endfor %}
+    {% block tab_title %}
+
+        <title>Todo List</title>
+
+    {% endblock tab_title %}
+
+
+    {% block page_content %}
     
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="button is-success is-fullwidth is-medium mt-5"
-                type="submit">Create
-        </button>
-    </form>
+        {% for todo in todos %}
 
-</body>
-</html>
+            <a href="{% url 'todo:todo-detail' pk=todo.pk%}">
+                <h3>{{todo.title}}</h3>
+            </a>
+        
+        {% endfor %}
+    
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button is-success is-fullwidth is-medium mt-5"
+                    type="submit">Create
+            </button>
+        </form>
+
+    {% endblock page_content %}
