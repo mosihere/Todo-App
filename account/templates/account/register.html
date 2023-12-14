@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+
+    {% block tab_title %}
+
+    <title>Register</title>
+
+    {% endblock tab_title %}
+
+
+    {% block page_content %}
+
+        <form  method="post">
+            {% csrf_token %}
+            
+            <div class="mcontainer">
+                {{form.as_p}}
+                
+                <button class="mybutton" type="submit">Register</button>
+                
+    {% endblock page_content %}
