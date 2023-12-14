@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block tab_title %}
+
+    <title>Todo List</title>
+
+    {% endblock tab_title %}
+
+</head>
+<body>
+
+    {% block message %}
+
+    {% if messages %}
+
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    {% endblock message %}
+
+
+    {% block page_content %}
+    
+    
+    {% endblock page_content %}
+    
+</body>
+</html>
