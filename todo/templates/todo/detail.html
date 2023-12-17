@@ -12,14 +12,81 @@
 
     {% block page_content %}
 
+        {% if user.is_authenticated %}
         <h4>{{ todo.details }}</h4>
-        <p> {{ todo.priority }}</p>
+
+        {% if todo.priority == 'M' %}
+        <p>Priority: Medium</p>
+
+        {% elif todo.priority == 'H' %}
+        <p>Priority: High</p>
+        
+        {% else %}
+        <p>Priority: Low</p>
+
+        {% endif %}
+        
+
+
+        {% else %}
+
+        <p>You Need to Register First</p>
+        <a class="nav-link" href="{% url 'account:register' %}">Register</a>
+        <p>Already Have an account?</p>
+        <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+        
+        {% endif %}
+        
+
+        {% if todo.status == 'I' %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <input style="background-color:greenyellow" type="submit" value="Done" name="done">
+        </form>
+        <p></p>
+        <p></p>
+        <small style="font-weight: bold; font-size: large;">In Progress</small>
+
+
+        {% elif todo.status == 'P' %}
 
         <form action="" method="post">
             {% csrf_token %}
-            <input type="submit" value="Delete">
+            <input style="background-color: rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress">
+        </form>
+        <p></p>
+        <p></p>
+        <small style="font-weight: bold; font-size: large;">Pending</small>
+
+
+        {% else %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input style="background-color: rgb(241, 215, 82)" type="submit" value="Pending" name="pending">
         </form>
 
+        <form action="" method="post">
+            {% csrf_token %}
+            <input style="background-color:rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress">
+        </form>
+        <p></p>
+        <p></p>
+        <small style="font-weight: bold; font-size: large;">Done</small>
+
+        
+        {% endif %}
+        
+        <p></p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input style="background-color: rgb(245, 154, 154)" type="submit" value="Delete" name="delete">
+        </form>
+
+        <p></p>
         <small>{{ todo.created_at }}</small>
+        
+
 
     {% endblock page_content %}

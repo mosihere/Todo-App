@@ -8,22 +8,39 @@
     {% endblock tab_title %}
 
 
+    
     {% block page_content %}
-    
-        {% for todo in todos %}
 
-            <a href="{% url 'todo:todo-detail' pk=todo.pk%}">
-                <h3>{{todo.title}}</h3>
-            </a>
-        
-        {% endfor %}
+    {% if not user.is_authenticated %}
     
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="button is-success is-fullwidth is-medium mt-5"
-                    type="submit">Create
-            </button>
-        </form>
+    <p>You Need to Register First</p>
+    <a class="nav-link" href="{% url 'account:register' %}">Register</a>
+    <p>Already Have an account?</p>
+    <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+    
+    
+    {% else %}
+    <h2>Welcome {{ user }}</h2>
+    <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
 
-    {% endblock page_content %}
+    {% for todo in todos %}
+    
+    <a href="{% url 'todo:todo-detail' pk=todo.pk%}">
+        <h3>{{todo.title}}</h3>
+    </a>
+    
+    {% endfor %}
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-success is-fullwidth is-medium mt-5"
+        type="submit">Create
+    </button>
+</form>
+    
+    {% endif %}
+  
+
+{% endblock page_content %}
+ 
