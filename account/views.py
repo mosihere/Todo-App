@@ -41,7 +41,7 @@ def user_login(request):
 
             if user:
                 login(request, user)
-                messages.success(request, 'Logged in successfully.')
+                messages.success(request, f'Logged in successfully as {user}')
                 return redirect('todo:todo-list')
             else:
                 messages.warning(request, 'Wrong Username or Password!')
@@ -51,3 +51,11 @@ def user_login(request):
         form = LoginForm()
         context = {'form': form}
         return render(request, 'account/login.html', context)
+    
+
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, "you logged out")
+    return redirect('todo:todo-list')
+    
