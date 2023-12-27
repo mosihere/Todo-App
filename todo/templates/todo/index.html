@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block static_files %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock static_files %}
 
 
     {% block tab_title %}
@@ -9,36 +23,137 @@
 
 
     
+
+    
     {% block page_content %}
+    {% if user.is_authenticated %}
 
-    {% if not user.is_authenticated %}
+
     
-    <p>You Need to Register First</p>
-    <a class="nav-link" href="{% url 'account:register' %}">Register</a>
-    <p>Already Have an account?</p>
-    <a class="nav-link" href="{% url 'account:login' %}">Login</a>
-    
-    
-    {% else %}
     <h2>Welcome {{ user }}</h2>
-    <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+    <div class="row d-flex justify-content-center container">
+      
+      
+      <div class="col-md-8">
+        <button class="border-0 btn-transition btn btn-outline-danger">
+        <a style="text-decoration:None; color: black" nav-link" href="{% url 'account:logout' %}"><b>Logout</b></a>
+        </button>
+        <br>
+        <br>
+        <div class="card-hover-shadow-2x mb-3 card">
+            <div class="card-header-tab card-header">
+              <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+                  class="fa fa-tasks"></i>&nbsp;Tasks List
+              </div>
+              
+            </div>
+          
+        <div class="col-md-8">
+            
 
-    {% for todo in todos %}
-    
-    <a href="{% url 'todo:todo-detail' pk=todo.pk%}">
-        <h3>{{todo.title}}</h3>
-    </a>
-    
-    {% endfor %}
-    
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="button is-success is-fullwidth is-medium mt-5"
-        type="submit">Create
-    </button>
+    </div>
+
+            <!-- <div class="scroll-area-sm"> -->
+              <!-- <perfect-scrollbar class="ps-show-limits"> -->
+                <div style="position: static;" class="ps ps--active-y">
+                  <div class="ps-content">
+                      
+                      
+                      
+                      {% for todo in todos %}
+                      
+                      <ul class=" list-group list-group-flush">
+                              <li class="list-group-item">
+                          
+                          
+                        <div class="todo-indicator badge-warning"></div>
+                        <div class="widget-content p-0">
+                            
+                          <div class="widget-content-wrapper">
+                            
+                            <div class="widget-content-left mr-2">
+                              <div class="custom-checkbox custom-control">
+                                {% comment %} <input class="custom-control-input"
+                                  id="exampleCustomCheckbox12" type="checkbox"><label class="custom-control-label"
+                                  for="exampleCustomCheckbox12">&nbsp;</label> {% endcomment %}
+                                </div>
+                                
+                            </div>
+                            <div class="widget-content-left">
+                              <div class="widget-heading">
+
+                                <h3>{{todo.title}}</h3>
+                                Priority:<div class="badge badge-info ml-2"> {{todo.priority}}
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <br>
+
+                            <div class="widget-content-right">
+                              
+
+                                <button class="border-0 btn-transition btn btn-outline-warning"><a style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}">Show Details</a>
+                                </button>
+  
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </li>
+                    
+                </ul>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </perfect-scrollbar>
+</div>
+
+
+<br>
+
+    <!-- <div class="col-md-8"> -->
+
+      <div class="card-hover-shadow-2x mb-3 card">
+        <div class="card-header-tab card-header">
+          <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+              class="fa fa-tasks"></i>&nbsp;Create Todo
+            </div>
+              
+            </div>
+            <br>
+        
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="border-0 btn-transition btn btn-outline-success" type="submit">Create
+
+</button>
 </form>
+</div>
+</div>
+</div>
     
+
+    {% else %}
+
+    
+    <div class="col-md-8">
+
+    <h3>You Need to Register/Login First</h3>
+
+      <button  class="border-0 btn-transition btn btn-outline-warning"><a class="nav-link" href="{% url 'account:register' %}">Register</a>
+      </button>
+    
+
+      <button  class="border-0 btn-transition btn btn-outline-success"><a class="nav-link" href="{% url 'account:login' %}">Login</a>
+
+      </button>
+    
+    </div>
+
     {% endif %}
   
 
