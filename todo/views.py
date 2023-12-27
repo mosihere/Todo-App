@@ -13,7 +13,7 @@ def todo_list(request):
             context = {'todos': todos, 'form': form}
             return render(request, 'todo/index.html', context=context)
         else:
-            return redirect('account:register')
+            return render(request, 'todo/index.html')
 
     elif request.method == 'POST':
         form = TodoForm(request.POST)
