@@ -1,6 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
 
 
+    {% block static_files %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        {% endblock static_files %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     {% block tab_title %}
 
@@ -13,80 +25,113 @@
     {% block page_content %}
 
         {% if user.is_authenticated %}
-        <h4>{{ todo.details }}</h4>
 
-        {% if todo.priority == 'M' %}
-        <p>Priority: Medium</p>
+        <div class="card-hover-shadow-2x mb-3 card">
+            <div class="card-header-tab card-header">
+              <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+                  class="fa fa-tasks"></i>&nbsp;{{ todo.title }}
+              </div>
+              
+            </div>
+            
+            <div class="col-md-8">
 
-        {% elif todo.priority == 'H' %}
-        <p>Priority: High</p>
+                <h5>{{ todo.details }}</h5>
+                <br>
+                {% if todo.priority == 'M' %}
+                <h4 style="display: inline;">Priority:</h4><div class="badge badge-primary ml-2">Medium
+
+                </div>
+                <br>
+                <br>     
+
+                {% elif todo.priority == 'H' %}
+                <h4 style="display: inline;">Priority:</h4><div class="badge badge-danger ml-2">High
+
+                </div>   
+                    <br>
+                    <br>  
+
+                {% else %}
+                <h4 style="display: inline;">Priority:</h4><div class="badge badge-secondary ml-2">Low
+
+                </div>        
+                <br>
+                <br>     
+                {% endif %}
+                
         
-        {% else %}
-        <p>Priority: Low</p>
-
-        {% endif %}
         
-
-
-        {% else %}
-
-        <p>You Need to Register First</p>
-        <a class="nav-link" href="{% url 'account:register' %}">Register</a>
-        <p>Already Have an account?</p>
-        <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+                {% else %}
         
-        {% endif %}
+                <p>You Need to Register First</p>
+                <a class="nav-link" href="{% url 'account:register' %}">Register</a>
+                <p>Already Have an account?</p>
+                <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+                
+                {% endif %}
+                
         
-
-        {% if todo.status == 'I' %}
-        <form action="" method="post">
-            {% csrf_token %}
-            <input style="background-color:greenyellow" type="submit" value="Done" name="done">
-        </form>
-        <p></p>
-        <p></p>
-        <small style="font-weight: bold; font-size: large;">In Progress</small>
-
-
-        {% elif todo.status == 'P' %}
-
-        <form action="" method="post">
-            {% csrf_token %}
-            <input style="background-color: rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress">
-        </form>
-        <p></p>
-        <p></p>
-        <small style="font-weight: bold; font-size: large;">Pending</small>
-
-
-        {% else %}
-
-        <form action="" method="post">
-            {% csrf_token %}
-            <input style="background-color: rgb(241, 215, 82)" type="submit" value="Pending" name="pending">
-        </form>
-
-        <form action="" method="post">
-            {% csrf_token %}
-            <input style="background-color:rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress">
-        </form>
-        <p></p>
-        <p></p>
-        <small style="font-weight: bold; font-size: large;">Done</small>
+                {% if todo.status == 'I' %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button class="border-0 btn-transition btn btn-outline-success" type="submit" value="Done" name="done"><i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></button>
+                    <!-- <input style="background-color:greenyellow" type="submit" value="Done" name="done"> -->
+                </form>
+                <p></p>
+                <p></p>
+                <small style="font-weight: bold; font-size: large;">Status: In Progress</small>
+                <i style="color: rgb(2, 120, 163);" class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
 
         
-        {% endif %}
+                {% elif todo.status == 'P' %}
         
-        <p></p>
-
-        <form action="" method="post">
-            {% csrf_token %}
-            <input style="background-color: rgb(245, 154, 154)" type="submit" value="Delete" name="delete">
-        </form>
-
-        <p></p>
-        <small>{{ todo.created_at }}</small>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <!-- <button class="border-0 btn-transition btn btn-outline-" type="submit" value="In Progress" name="in progress">In Progress</button> -->
         
+                    <input style="background-color: rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress">
+                </form>
+                <p></p>
+                <p></p>
+                <small style="font-weight: bold; font-size: large;">Status: Pending</small>
+                <i style="color: rgb(213, 192, 9)" class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
+
+        
+        
+                {% else %}
+        
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button class="border-0 btn-transition btn btn-outline-warning" type="submit" value="Pending" name="pending"><i class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></button>
+        
+                </form>
+        
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input style="background-color:rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress"><i class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>
+                </form>
+                <p></p>
+                <p></p>
+                <small style="font-weight: bold; font-size: large;">Status: Done</small>
+                <i style="color: rgb(99, 163, 2);" class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
+        
+                
+                {% endif %}
+                
+                <p></p>
+        
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button class="border-0 btn-transition btn btn-outline-danger" type="submit" value="Delete" name="delete"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></button>
+        
+                </form>
+        
+                <p></p>
+                <small>{{ todo.created_at }}</small>
+                
+        </div>
+    </div>
 
 
     {% endblock page_content %}
