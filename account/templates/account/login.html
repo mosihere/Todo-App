@@ -4,8 +4,28 @@
 
 {% block static_files %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'account/style.css' %}">
-
+<link rel="stylesheet" type="text/css" href="{% static 'account/css/style.css' %}">
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="{% static 'account/images/icons/favicon.ico' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/vendor/bootstrap/css/bootstrap.min.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'account/vendor/css-hamburgers/hamburgers.min.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/vendor/animsition/css/animsition.min.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/vendor/select2/select2.min.css' %} ">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'account/vendor/daterangepicker/daterangepicker.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'account/css/util.css' %}">
+<!--===============================================================================================-->
 
 {% endblock static_files %}
 
@@ -20,20 +40,77 @@
 
 {% block page_content %}
 
-<form  method="post">
-    {% csrf_token %}
-    
-      <div class="mcontainer">
-        {{form.as_p}}
-        <button class="mybutton" type="submit">Login</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-    
-      </div>
-    
-    
-    </form>
+      <form method="post" class="login100-form validate-form">
+        {% csrf_token %}
+        <span class="login100-form-title p-b-43">
+          Login to continue
+        </span>
         
+        
+          {{form.as_p}}
+
+        <div class="flex-sb-m w-full p-t-3 p-b-32">
+          <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+            <label class="label-checkbox100" for="ckb1">
+              Remember me
+            </label>
+          </div>
+
+          <div>
+            <a href="#" class="txt1">
+              Forgot Password?
+            </a>
+          </div>
+        </div>
+    
+
+        <div class="container-login100-form-btn">
+          <button type="submit" class="login100-form-btn">
+            Login
+          </button>
+        </div>
+        
+
+        <br>
+
+        <p>Don't have account?</p>
+        <a class="nav-link" href="{% url 'account:register' %}">Register</a>
+
+        {% comment %} <div class="text-center p-t-46 p-b-20">
+          <span class="txt2">
+            or sign up using
+          </span>
+        </div>
+
+        <div class="login100-form-social flex-c-m">
+          <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+          </a>
+
+          <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
+        </div> {% endcomment %}
+      </form>
+
+
+
+
+<!--===============================================================================================-->
+<script src="{% static 'account/vendor/jquery/jquery-3.2.1.min.js' %} "></script>
+<!--===============================================================================================-->
+	<script src="{% static 'account/vendor/animsition/js/animsition.min.js' %} "></script>
+<!--===============================================================================================-->
+	<script src="{% static 'account/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'account/vendor/bootstrap/js/bootstrap.min.js' %} "></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<script src="{% static 'account/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'account/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'account/js/main.js' %}"></script>
+
+
     {% endblock page_content %}
