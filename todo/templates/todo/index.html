@@ -34,9 +34,7 @@
       
       
       <div class="col-md-8">
-        <button class="border-0 btn-transition btn btn-outline-danger">
-        <a style="text-decoration:None; color: rgb(255, 255, 255)" nav-link" href="{% url 'account:logout' %}"><i class="fa fa-sign-out"></i> <b>Logout</b></a>
-        </button>
+        <a class="border-0 btn-transition btn btn-outline-danger" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link" href="{% url 'account:logout' %}"><i class="fa fa-sign-out"></i><b>Logout</b></a>
         <br>
         <br>
         <div class="card-hover-shadow-2x mb-3 card">
@@ -62,7 +60,6 @@
 
 
 
-                    {% comment %} <div class="todo-indicator badge-warning"></div> {% endcomment %}
                     <div class="widget-content p-0">
                         
                       <div class="widget-content-wrapper">
@@ -145,8 +142,7 @@
                               
 
                                 <small style="color: #1f3700;">Show Details <i class="fa fa-arrow-right"></i></small>
-                                <button class="border-0 btn-transition btn btn-outline-warning"><a style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}"><i class='fa fa-info-circle'></i></a>
-                                </button>
+                                <a class="border-0 btn-transition btn btn-outline-warning" style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}"><i class='fa fa-info-circle'></i></a>
   
                                 </div>
                             </div>
