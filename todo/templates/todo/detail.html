@@ -7,12 +7,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="{% static 'todo/style.css' %}">
 
-        {% endblock static_files %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% endblock static_files %}
 
     {% block tab_title %}
 
@@ -25,11 +26,17 @@
     {% block page_content %}
 
         {% if user.is_authenticated %}
+        <button class="border-0 btn-transition btn btn-outline-danger">
+            <a style="font-size:30px" href="{% url 'todo:todo-list' %}"><i style="color:white" class="fa fa-arrow-left" aria-hidden="true"></i></a></button>
+        
+            
+            <div class="justify-content-center container">
+            <h2 style="color:rgb(233, 255, 144)">{{ todo.title }} Details</h2>
 
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="card-header-tab card-header">
-              <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-                  class="fa fa-tasks"></i>&nbsp;{{ todo.title }}
+              <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                <i class="fa fa-tasks"></i>&nbsp;{{ todo.title }}
               </div>
               
             </div>
@@ -71,67 +78,82 @@
                 
                 {% endif %}
                 
-        
+                <small style="color:cadetblue;">You can update Todo Status By Buttons Below</small>
                 {% if todo.status == 'I' %}
                 <form action="" method="post">
                     {% csrf_token %}
-                    <button class="border-0 btn-transition btn btn-outline-success" type="submit" value="Done" name="done"><i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></button>
+                    <button class="border-0 btn-transition btn btn-outline-success" type="submit" value="Done" name="done"><i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Done"></i></button>
                     <!-- <input style="background-color:greenyellow" type="submit" value="Done" name="done"> -->
                 </form>
                 <p></p>
                 <p></p>
-                <small style="font-weight: bold; font-size: large;">Status: In Progress</small>
-                <i style="color: rgb(2, 120, 163);" class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
 
+                <div class="card-hover-shadow-2x mb-3 card-header">
+                <h4>Status:</h4><small style="font-weight: bold; font-size: large;color:rgb(8, 133, 133);">&nbsp;In Progress&nbsp;</small>
+                <i style="color: rgb(2, 120, 163);" class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
+                </div>
         
                 {% elif todo.status == 'P' %}
         
                 <form action="" method="post">
                     {% csrf_token %}
-                    <!-- <button class="border-0 btn-transition btn btn-outline-" type="submit" value="In Progress" name="in progress">In Progress</button> -->
         
-                    <input style="background-color: rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress">
+                    <button class="border-0 btn-transition btn btn-outline-info" type="submit" value="In Progress" name="in progress"><i class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="In Progress"></i></button>
                 </form>
                 <p></p>
                 <p></p>
-                <small style="font-weight: bold; font-size: large;">Status: Pending</small>
-                <i style="color: rgb(213, 192, 9)" class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
 
+                <div class="card-hover-shadow-2x mb-3 card-header">
+
+                <h4>Status:</h4><small style="font-weight: bold; font-size: large;color:rgb(255, 193, 7)">&nbsp;Pending&nbsp;</small>
+                <i style="color: rgb(255, 193, 7)" class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Pending Status"></i>
+                </div>
         
         
                 {% else %}
         
                 <form action="" method="post">
                     {% csrf_token %}
-                    <button class="border-0 btn-transition btn btn-outline-warning" type="submit" value="Pending" name="pending"><i class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></button>
+                    <button class="border-0 btn-transition btn btn-outline-warning" type="submit" value="Pending" name="pending"><i class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Pending"></i></button>
         
                 </form>
         
                 <form action="" method="post">
                     {% csrf_token %}
-                    <input style="background-color:rgb(131, 131, 246)" type="submit" value="In Progress" name="in progress"><i class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>
+                    <button class="border-0 btn-transition btn btn-outline-info" type="submit" value="In Progress" name="in progress"><i class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="In Progress"></i></button>
                 </form>
                 <p></p>
                 <p></p>
-                <small style="font-weight: bold; font-size: large;">Status: Done</small>
-                <i style="color: rgb(99, 163, 2);" class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
+
+                <div class="card-hover-shadow-2x mb-3 card-header">
+                <h4>Status:</h4><small style="font-weight: bold; font-size: large;color:green">&nbsp;Done&nbsp;</small>
+                <i style="color: rgb(99, 163, 2);" class="fa fa-check-square" data-toggle="tooltip" data-placement="bottom" title="Done"></i>
+            </div>
         
                 
                 {% endif %}
                 
                 <p></p>
         
-                <form action="" method="post">
+                <form action="" method="post" style="display:inline">
                     {% csrf_token %}
-                    <button class="border-0 btn-transition btn btn-outline-danger" type="submit" value="Delete" name="delete"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></button>
-        
+                    <button style="display:inline" class="border-0 btn-transition btn btn-outline-danger" type="submit" value="Delete" name="delete"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></button>
                 </form>
         
+                <form method="post" style="display:inline">
+                    {% csrf_token %}
+                    <a class="border-0 btn-transition btn btn-outline-primary" href="{% url 'todo:edit-todo' todo.pk %}"><i class="fa fa-edit" data-toggle="tooltip" data-placement="bottom" title="Edit"></i></a>
+                    <p></p>
+                    
+                </form>
+
                 <p></p>
-                <small>{{ todo.created_at }}</small>
+                <small style="display: block; color:rgb(1, 84, 87);"><i class="fa fa-calendar-times-o"></i> Created at: {{ todo.created_at }}</small>
+                <small style="color:rgb(1, 84, 87)"><i class="fa fa-refresh"></i> Updated: {{ todo.last_update }}</small>
                 
         </div>
     </div>
+</div>
 
 
     {% endblock page_content %}
