@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 {% endblock static_files %}
 
 
@@ -30,18 +29,19 @@
 
 
     
-    <h2>Welcome {{ user }}</h2>
+    <p style="display: inline; color:white;">Welcome <p style="color: rgb(58, 136, 225); display: inline; font-size: 20px;">{{ user }}</p></p>
     <div class="row d-flex justify-content-center container">
       
       
       <div class="col-md-8">
         <button class="border-0 btn-transition btn btn-outline-danger">
-        <a style="text-decoration:None; color: black" nav-link" href="{% url 'account:logout' %}"><b>Logout</b></a>
+        <a style="text-decoration:None; color: rgb(255, 255, 255)" nav-link" href="{% url 'account:logout' %}"><i class="fa fa-sign-out"></i> <b>Logout</b></a>
         </button>
         <br>
         <br>
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="card-header-tab card-header">
+              
               <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
                   class="fa fa-tasks"></i>&nbsp;Tasks List
               </div>
@@ -53,11 +53,42 @@
 
     </div>
 
-            <!-- <div class="scroll-area-sm"> -->
-              <!-- <perfect-scrollbar class="ps-show-limits"> -->
                 <div style="position: static;" class="ps ps--active-y">
                   <div class="ps-content">
-                      
+
+
+
+
+
+
+
+                    {% comment %} <div class="todo-indicator badge-warning"></div> {% endcomment %}
+                    <div class="widget-content p-0">
+                        
+                      <div class="widget-content-wrapper">
+                        
+                        <div class="widget-content-left mr-2">
+                          
+                            
+                          </div>
+                          <div class="widget-content-right">
+                          <small style="color:rgb(41, 118, 0);">Add <i class="fa fa-arrow-right"></i></small>
+                          <a class="border-0 btn-transition btn btn-outline-success" href="{% url 'todo:create-todo' %}"><i class="fa fa-plus" data-toggle="tooltip" data-placement="bottom" title="Create Todo"></i></a>
+
+                            
+                        </div>
+
+  
+
+                    </div>
+
+      
+
+                    
+
+
+
+                    
                       
                       
                       {% for todo in todos %}
@@ -73,9 +104,6 @@
                             
                             <div class="widget-content-left mr-2">
                               <div class="custom-checkbox custom-control">
-                                {% comment %} <input class="custom-control-input"
-                                  id="exampleCustomCheckbox12" type="checkbox"><label class="custom-control-label"
-                                  for="exampleCustomCheckbox12">&nbsp;</label> {% endcomment %}
                                 </div>
                                 
                             </div>
@@ -83,18 +111,41 @@
                               <div class="widget-heading">
 
                                 <h3>{{todo.title}}</h3>
+
+                                {% if todo.priority == "H" %}
+                                Priority:<div class="badge badge-danger ml-2"> {{todo.priority}}
+
+                                
+                                {% elif todo.priority == "L" %}
+                                Priority:<div class="badge badge-secondary ml-2"> {{todo.priority}}
+
+                                {% else %}
                                 Priority:<div class="badge badge-info ml-2"> {{todo.priority}}
+
+                                {% endif %}
 
                                 </div>
                                 
                             </div>
+
+                            {% if todo.status == 'D' %}
+                            <p style="display:inline">Status: </p><i style="color: rgb(99, 163, 2); font-size:20px" class="fa fa-check-square" data-toggle="tooltip" data-placement="bottom" title="Done Status"></i>
+
+                            {% elif todo.status == 'P' %}
+                            <p style="display:inline">Status: </p><i style="color: rgb(255, 193, 7); font-size:20px" class="fa fa-pause" data-toggle="tooltip" data-placement="bottom" title="Pending Status"></i>
+                            {% else %}
+                            <p style="display:inline">Status: </p><i style="color: rgb(23, 162, 184); font-size:20px" class="fa fa-level-up" data-toggle="tooltip" data-placement="bottom" title="In Progress Status"></i>
+
+                            {% endif %}
+
                         </div>
                         <br>
 
                             <div class="widget-content-right">
                               
 
-                                <button class="border-0 btn-transition btn btn-outline-warning"><a style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}">Show Details</a>
+                                <small style="color: #1f3700;">Show Details <i class="fa fa-arrow-right"></i></small>
+                                <button class="border-0 btn-transition btn btn-outline-warning"><a style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}"><i class='fa fa-info-circle'></i></a>
                                 </button>
   
                                 </div>
@@ -105,10 +156,10 @@
                     
                 </ul>
                 {% endfor %}
+
             </div>
             
         </div>
-    </perfect-scrollbar>
 </div>
 
 
@@ -116,39 +167,21 @@
 
     <!-- <div class="col-md-8"> -->
 
-      <div class="card-hover-shadow-2x mb-3 card">
-        <div class="card-header-tab card-header">
-          <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-              class="fa fa-tasks"></i>&nbsp;Create Todo
-            </div>
-              
-            </div>
-            <br>
-        
-<form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button class="border-0 btn-transition btn btn-outline-success" type="submit">Create
-
-</button>
-</form>
-</div>
-</div>
-</div>
+     
     
 
     {% else %}
 
     
     <div class="col-md-8">
+      <br>
+    <h3 style="color:white">You Need to Register/Login First</h3>
 
-    <h3>You Need to Register/Login First</h3>
-
-      <button  class="border-0 btn-transition btn btn-outline-warning"><a class="nav-link" href="{% url 'account:register' %}">Register</a>
+      <button  class="btn btn-success btn-sm"><a style="color:white" class="nav-link" href="{% url 'account:register' %}"><i class="fa fa-wpforms"></i> Register</a>
       </button>
     
-
-      <button  class="border-0 btn-transition btn btn-outline-success"><a class="nav-link" href="{% url 'account:login' %}">Login</a>
+      
+      <button  type="button" class="btn btn-info btn-sm"><a style="color:white" class="nav-link" href="{% url 'account:login' %}"><i class="fa fa-sign-in"></i> Login</a>
 
       </button>
     
@@ -156,6 +189,4 @@
 
     {% endif %}
   
-
-{% endblock page_content %}
- 
+    {% endblock page_content %}
