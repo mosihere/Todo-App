@@ -6,7 +6,9 @@ body {
     line-height: 1.5;
     color: #495057;
     text-align: left;
-    background-color: #6200EA;
+    background: url(base_image.jpg);
+    /* background-repeat: repeat; */
+    /* background-size: 1000px; */
 }
 
 i {
