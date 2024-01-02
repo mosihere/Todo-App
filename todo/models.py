@@ -35,6 +35,7 @@ class Todo(models.Model):
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default=MEDIUM_PRIORITY)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=PENDING_STATUS)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return self.title
