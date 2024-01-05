@@ -64,7 +64,7 @@ def edit_todo(request, pk):
                 return redirect('todo:todo-list')
             
             else:
-                form = TodoForm(request.POST, instance=todo)
+                form = TodoForm(request.POST, request.FILES, instance=todo)
                 if form.is_valid():
                     form.save()
                     messages.success(request, 'The Todo has been updated successfully.')
@@ -87,14 +87,13 @@ def create_todo(request):
                 return redirect('todo:todo-list')
             
             else:
-                form = TodoForm(request.POST)
+                form = TodoForm(request.POST, request.FILES)
                 if form.is_valid():
                     user = request.user
                     new_form = form.save(commit=False)
                     new_form.owner = user
                     new_form.save()
                     form = TodoForm()
-                    context = {'form': form}
                     messages.success(request, 'The Todo has been Created successfully.')
                     return redirect('todo:todo-list')
     else:
