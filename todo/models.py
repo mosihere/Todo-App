@@ -36,7 +36,7 @@ class Todo(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=PENDING_STATUS)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now=True)
-    image = models.ImageField(blank=True, default='https://m.media-amazon.com/images/I/31RvOPlfH7L.png')
+    image = models.ImageField(default='default.png')
 
 
     def __str__(self) -> str:
