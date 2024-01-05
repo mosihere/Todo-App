@@ -140,12 +140,15 @@
 
                             <div class="widget-content-right">
                               
+                              
+                              <small style="color: #1f3700;">Show Details <i class="fa fa-arrow-right"></i></small>
+                              <a class="border-0 btn-transition btn btn-outline-warning" style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}"><i class='fa fa-info-circle'></i></a>
 
-                                <small style="color: #1f3700;">Show Details <i class="fa fa-arrow-right"></i></small>
-                                <a class="border-0 btn-transition btn btn-outline-warning" style="text-decoration: None; color:rgb(38, 45, 23)" href="{% url 'todo:todo-detail' pk=todo.pk%}"><i class='fa fa-info-circle'></i></a>
-  
-                                </div>
+                              <img style="height: 120px;width: 120px;" src="{{todo.image.url}}" class="card-img-top" alt="..." alt="A generic square placeholder image with rounded corners in a figure.">
+
+
                             </div>
+                          </div>
                         </div>
                         
                     </li>
