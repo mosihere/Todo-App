@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 
 
+
 {% block static_files %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'todo/style.css' %}">
@@ -21,13 +22,7 @@
     {% endblock tab_title %}
 
 
-    
-
-    
     {% block page_content %}
-    {% if user.is_authenticated %}
-
-
     
     <p style="display: inline; color:white;">Welcome <p style="color: rgb(58, 136, 225); display: inline; font-size: 20px;">{{ user }}</p></p>
     <div class="row d-flex justify-content-center container">
@@ -47,18 +42,10 @@
             </div>
           
         <div class="col-md-8">
-            
 
     </div>
-
                 <div style="position: static;" class="ps ps--active-y">
                   <div class="ps-content">
-
-
-
-
-
-
 
                     <div class="widget-content p-0">
                         
@@ -75,18 +62,7 @@
                             
                         </div>
 
-  
-
                     </div>
-
-      
-
-                    
-
-
-
-                    
-                      
                       
                       {% for todo in todos %}
                       
@@ -161,31 +137,6 @@
         </div>
 </div>
 
-
 <br>
 
-    <!-- <div class="col-md-8"> -->
-
-     
-    
-
-    {% else %}
-
-    
-    <div class="col-md-8">
-      <br>
-    <h3 style="color:white">You Need to Register/Login First</h3>
-
-      <button  class="btn btn-success btn-sm"><a style="color:white" class="nav-link" href="{% url 'account:register' %}"><i class="fa fa-wpforms"></i> Register</a>
-      </button>
-    
-      
-      <button  type="button" class="btn btn-info btn-sm"><a style="color:white" class="nav-link" href="{% url 'account:login' %}"><i class="fa fa-sign-in"></i> Login</a>
-
-      </button>
-    
-    </div>
-
-    {% endif %}
-  
-    {% endblock page_content %}
+  {% endblock page_content %}
