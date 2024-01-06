@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block static_files %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'todo/style.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock static_files %}
+
+
+
+
+{% block % tab_title}
+
+<title>Home</title>
+
+{% endblock % tab_title}
+
+
+
+{% block page_content %}
+
+<div class="col-md-8">
+    <br>
+  <h3 style="color:white">You Need to Register/Login First</h3>
+
+    <button  class="btn btn-success btn-sm"><a style="color:white" class="nav-link" href="{% url 'account:register' %}"><i class="fa fa-wpforms"></i> Register</a>
+    </button>
+  
+    
+    <button  type="button" class="btn btn-info btn-sm"><a style="color:white" class="nav-link" href="{% url 'account:login' %}"><i class="fa fa-sign-in"></i> Login</a>
+
+    </button>
+  
+  </div>
+
+{% endblock page_content %}
+
