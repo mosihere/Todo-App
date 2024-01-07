@@ -93,7 +93,6 @@ def create_todo(request):
                     new_form = form.save(commit=False)
                     new_form.owner = user
                     new_form.save()
-                    form = TodoForm()
                     messages.success(request, 'The Todo has been Created successfully.')
                     return redirect('todo:todo-list')
     else:
