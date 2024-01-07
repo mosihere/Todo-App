@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ProfileForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -59,3 +59,19 @@ def user_logout(request):
     messages.success(request, "you logged out")
     return redirect('todo:todo-list')
     
+
+def user_profile(request):
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
+        if request.method == 'GET':
+            form = ProfileForm(instance=user)
+            return render(request, 'account/user_profile.html', {'user': user, 'form': form})
+        
+        form = ProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully')
+            return redirect('account:profile')
+        
+    else:
+        return redirect('home:home')
