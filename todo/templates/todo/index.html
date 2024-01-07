@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 {% endblock static_files %}
 
 
@@ -29,7 +30,8 @@
       
       
       <div class="col-md-8">
-        <a class="border-0 btn-transition btn btn-outline-danger" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link" href="{% url 'account:logout' %}"><i class="fa fa-sign-out"></i><b>Logout</b></a>
+        <a class="border-0 btn-transition btn btn-outline-info" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link href="{% url 'account:profile' %}"><i class="fa fa-user"></i><b> Profile</b></a>
+        <a class="border-0 btn-transition btn btn-outline-danger" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link href="{% url 'account:logout' %}"><i class="fa fa-sign-out"></i><b> Logout</b></a>
         <br>
         <br>
         <div class="card-hover-shadow-2x mb-3 card">
