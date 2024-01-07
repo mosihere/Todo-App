@@ -15,7 +15,7 @@ def user_register(request):
 
         if form.is_valid():
             cd = form.cleaned_data
-            User.objects.create_user(cd['username'], cd['email'], cd['password'])
+            User.objects.create_user(username=cd['username'], email=cd['email'], password=cd['password'], first_name=cd['first_name'], last_name=cd['last_name'])
             messages.success(request, 'Your Registration Complete')
             return redirect('account:login')
         
