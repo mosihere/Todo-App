@@ -28,10 +28,11 @@
     <p style="display: inline; color:white;">Welcome <p style="color: rgb(58, 136, 225); display: inline; font-size: 20px;">{{ user }}</p></p>
     <div class="row d-flex justify-content-center container">
       
-      
+
       <div class="col-md-8">
         <a class="border-0 btn-transition btn btn-outline-info" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link href="{% url 'account:profile' %}"><i class="fa fa-user"></i><b> Profile</b></a>
         <a class="border-0 btn-transition btn btn-outline-danger" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link href="{% url 'account:logout' %}"><i class="fa fa-sign-out"></i><b> Logout</b></a>
+        <a class="border-0 btn-transition btn btn-outline-primary" style="text-decoration:None; color: rgb(255, 255, 255)" nav-link href="{% url 'todo:export-email' %}"><i class="fa fa-print"></i><b> Export as Email</b></a>
         <br>
         <br>
         <div class="card-hover-shadow-2x mb-3 card">
