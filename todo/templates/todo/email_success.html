@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block static_files %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+{% endblock static_files %}
+
+
+    {% block tab_title %}
+
+        <title>Your Tasks Sent to your Email</title>
+
+    {% endblock tab_title %}
+
+
+    {% block page_content %}
+    
+    <div class="row d-flex justify-content-center container">
+      
+      
+      <div class="col-md-8">
+  
+            <h3 style="color: antiquewhite;">Your Tasks Has Sent To Your Email</h3>
+            <a style="text-decoration: underline;color: yellowgreen;" href="{% url 'todo:todo-list' %}">Back to Home</a>
+
+    </div>
+
+  {% endblock page_content %}
