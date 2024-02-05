@@ -2,15 +2,20 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Todo
 from django.contrib import messages
 from .forms import TodoForm
-# Create your views here.
+from .tasks import send_email_todos
+import os
+from django.http import JsonResponse
+from django.core.serializers import serialize
+import json
+from django.template.loader import render_to_string
+
 
 
 def todo_list(request):
 
     if request.user.is_authenticated:
         todos = Todo.objects.filter(owner=request.user).order_by('-last_update')
-        form = TodoForm()
-        context = {'todos': todos, 'form': form}
+        context = {'todos': todos}
         return render(request, 'todo/index.html', context=context)
     else:
         return redirect('home:home')
@@ -95,5 +100,26 @@ def create_todo(request):
                     new_form.save()
                     messages.success(request, 'The Todo has been Created successfully.')
                     return redirect('todo:todo-list')
+    else:
+        return redirect('todo:todo-list')
+    
+
+def send_user_todo_by_email(request):
+
+    if request.user.is_authenticated:
+        user = request.user
+        user_email = request.user.email
+        user_todos = Todo.objects.filter(owner=user)
+        serialized_data = serialize("json", user_todos)
+        serialized_data = json.loads(serialized_data)
+
+        send_email_todos.delay(
+            user_email,
+            render_to_string('todo/todo_mail_template.html', {'todos': user_todos}),
+            os.environ.get('GMAIL', '')
+        )
+
+        return render(request, 'todo/email_success.html')
+    
     else:
         return redirect('todo:todo-list')
