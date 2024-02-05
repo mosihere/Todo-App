@@ -1,0 +1,49 @@
+              <h2>Todo-List</h2>
+                      <br>
+                      {% for todo in todos %}
+                      <h3>Todo: {{todo.title}}</h3>
+                <h4>description:<p>{{ todo.details }}</p></h4>
+                <br>
+                {% if todo.priority == 'M' %}
+                <h4 style="display: inline;">Priority:</h4><div class="badge badge-primary ml-2">Medium
+
+                </div>
+
+                {% elif todo.priority == 'H' %}
+                <h4 style="display: inline;">Priority:</h4><div class="badge badge-danger ml-2">High
+
+                </div>   
+                    <br>  
+
+                {% else %}
+                <h4 style="display: inline;">Priority:</h4><div class="badge badge-secondary ml-2">Low
+
+                </div>        
+                <br>     
+                {% endif %}
+
+
+
+                {% if todo.status == 'P' %}
+                <h4 style="display: inline;">Status:</h4><div class="badge badge-primary ml-2">Pending
+
+                </div>
+                <br>
+                <br>     
+
+                {% elif todo.status == 'I' %}
+                <h4 style="display: inline;">Status:</h4><div class="badge badge-danger ml-2">In Progress
+
+                </div>   
+                    <br>
+                    <br>  
+
+                {% else %}
+                <h4 style="display: inline;">Status:</h4><div class="badge badge-secondary ml-2">Done
+
+                </div>        
+                <br>
+                <br>     
+                {% endif %}
+
+                {% endfor %}
