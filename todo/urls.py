@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:pk>', views.todo_detail, name='todo-detail'),
     path('create/', views.create_todo, name='create-todo'),
     path('edit/<int:pk>', views.edit_todo, name='edit-todo'),
+    path('export/', views.send_user_todo_by_email, name='export-email'),
 ]
