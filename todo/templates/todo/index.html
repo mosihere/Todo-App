@@ -114,6 +114,13 @@
 
                             {% endif %}
 
+                            <br>
+                            {% if todo.due_date%}
+                            <p style="display:inline">Due-Date: </p><i style="color: rgb(23, 162, 184); font-size:20px" class="fa fa-calendar-check-o" data-toggle="tooltip" data-placement="bottom" title="Due Date"></i>
+                            {% else %}
+                            <p style="display:inline">Due-Date: </p><i style="color: rgb(227, 59, 26); font-size:20px" class="fa fa-calendar-times-o" data-toggle="tooltip" data-placement="bottom" title="Due Date"></i>
+                            {% endif %}
+
                         </div>
                         <br>
 
