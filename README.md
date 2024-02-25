@@ -17,6 +17,7 @@ You can check this Todo web-app [here](http://mosmorris.pythonanywhere.com)
 10. Update Todo Status
 11. Reset Password using Email
 12. Edit Profile --> First Name & Last Name & Email
+13. Export Todos as Mail
 
 ### Adding features:
 - [ ] (Adding RESTful API)
