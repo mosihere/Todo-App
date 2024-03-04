@@ -46,10 +46,12 @@
                 <img style="height: 200px;width: 200px;" src="{{todo.image.url}}" class="card-img-top" alt="..." alt="A generic square placeholder image with rounded corners in a figure.">
                 <br>
                 <br>
-                <h4>Description:</h4><h5>{{ todo.details }}</h5>
+                <h4 style="display: inline;"><i style="color: rgb(23, 162, 184); font-size:20px" class="fa fa-pencil" data-toggle="tooltip" data-placement="bottom" title="Due Date"></i></h4><div class="badge badge-shadow ml-2"><h5>{{todo.details}}</h5></div>
+                <br>
+                <h4 style="display: inline;"><i style="color: rgb(23, 162, 184); font-size:20px" class="fa fa-calendar-check-o" data-toggle="tooltip" data-placement="bottom" title="Due Date"></i></h4><div class="badge badge-shadow ml-2"><h6>{{todo.due_date}}</h6></div>
                 <br>
                 {% if todo.priority == 'M' %}
-                <h4 style="display: inline;">Priority:</h4><div class="badge badge-primary ml-2">Medium
+                <h4 style="display: inline;"><i style="color: rgb(23, 162, 184); font-size:20px" class="fa fa-list-ol" data-toggle="tooltip" data-placement="bottom" title="Due Date"></i></h4><div class="badge badge-primary ml-2">Medium
 
                 </div>
                 <br>
@@ -69,8 +71,6 @@
                 <br>
                 <br>
 
-                <h4 style="display: inline;">Due-Date:</h4><div class="badge badge-shadow ml-2"><h6>{{todo.due_date}}</h6></div>
-                
                 <br>
                 <br>     
                 {% endif %}
