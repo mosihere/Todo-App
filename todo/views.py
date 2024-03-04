@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 import json
 from django.template.loader import render_to_string
-
+import time
 
 
 def todo_list(request):
@@ -24,10 +24,14 @@ def todo_list(request):
 def todo_detail(request, pk):
 
     todo = get_object_or_404(Todo, pk=pk)
-
+    now = time.time()
+    due_date = todo.due_date
+    if due_date:
+        due_date = todo.due_date.timestamp()
+        
     if request.user == todo.owner:
 
-        context = {'todo': todo}
+        context = {'todo': todo, 'now': now, 'due_date': due_date}
 
         if request.method == 'POST':
             if request.POST.get('delete') == 'Delete':
