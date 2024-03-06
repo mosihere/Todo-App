@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'todo',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'Linken.m0s',
+        'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
 
