@@ -36,7 +36,7 @@ class Todo(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=PENDING_STATUS)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now=True)
-    due_date = models.DateField(blank=True, null=True)
+    due_date = models.DateTimeField(null=True, blank=True)
     image = models.ImageField(default='default.png')
 
 
