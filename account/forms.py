@@ -8,8 +8,6 @@ from django.core.exceptions import ValidationError
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Username'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}))
-    first_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name'}))
-    last_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name'}))
     password = forms.CharField(max_length=255, widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
     confirm_password = forms.CharField(max_length=255, widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Confirm Password'}))
 
