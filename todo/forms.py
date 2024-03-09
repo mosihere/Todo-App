@@ -8,5 +8,5 @@ class TodoForm(ModelForm):
         model = Todo
         fields = ['title', 'details', 'priority', 'due_date', 'image']
         widgets = {
-            'due_date': forms.widgets.DateInput(attrs={'type': 'date'})
+            'due_date': forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'})
         }

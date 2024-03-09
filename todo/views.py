@@ -1,14 +1,14 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
-from .models import Todo
-from django.contrib import messages
-from .forms import TodoForm
-from .tasks import send_email_todos
 import os
-from django.http import JsonResponse
-from django.core.serializers import serialize
-import json
-from django.template.loader import render_to_string
 import time
+import json
+from .models import Todo
+from .forms import TodoForm
+from django.contrib import messages
+from .tasks import send_email_todos
+from django.core.serializers import serialize
+from django.template.loader import render_to_string
+from django.shortcuts import render, get_object_or_404, redirect
+
 
 
 def todo_list(request):
