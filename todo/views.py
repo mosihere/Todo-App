@@ -14,7 +14,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 def todo_list(request):
 
     if request.user.is_authenticated:
-        todos = Todo.objects.filter(owner=request.user).order_by('-last_update')
+        todos = Todo.objects.select_related('owner').filter(owner=request.user).order_by('-last_update')
         context = {'todos': todos}
         return render(request, 'todo/index.html', context=context)
     else:
@@ -23,7 +23,7 @@ def todo_list(request):
 
 def todo_detail(request, pk):
 
-    todo = get_object_or_404(Todo, pk=pk)
+    todo = get_object_or_404(Todo.objects.select_related('owner'), pk=pk)
     now = time.time()
     due_date = todo.due_date
     if due_date:
@@ -60,7 +60,7 @@ def todo_detail(request, pk):
 
 def edit_todo(request, pk):
 
-    todo = get_object_or_404(Todo, pk=pk)
+    todo = get_object_or_404(Todo.objects.select_related('owner'), pk=pk)
 
     if request.user == todo.owner:
 
